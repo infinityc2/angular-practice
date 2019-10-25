@@ -1,0 +1,17 @@
+<mat-toolbar>
+  <span>
+    <button mat-button (click)="sidenav.toggle()">
+      <mat-icon></mat-icon>
+    </button>
+  </span>
+  <span>Computer Repair System</span>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side">
+    List Here
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
