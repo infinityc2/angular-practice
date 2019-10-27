@@ -1,14 +1,19 @@
 <mat-toolbar>
   <span>
     <button mat-button (click)="sidenav.toggle()">
-      <mat-icon></mat-icon>
+      <mat-icon>reorder</mat-icon>
     </button>
   </span>
   <span>Computer Repair System</span>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side">
-    List Here
+    <mat-list>
+      <mat-list-item>
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <h4>Request</h4>
+      </mat-list-item>
+    </mat-list>
   </mat-sidenav>
 
   <mat-sidenav-content>

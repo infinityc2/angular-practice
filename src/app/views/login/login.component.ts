@@ -23,18 +23,18 @@ export class LoginComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initLoginForm();
   }
 
-  initLoginForm() {
+  initLoginForm(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
-  login() {
+  login(): void {
     if (this.loginForm.valid) {
       this.api.login(this.loginForm).subscribe(response => {
         

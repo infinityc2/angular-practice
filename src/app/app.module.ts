@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 import { LoginComponent } from './views/login/login.component';
 import { RequestComponent } from './views/request/request.component';
@@ -52,6 +53,7 @@ import { LayoutCustomerComponent } from './layouts/layout-customer/layout-custom
     MatNativeDateModule,
     MatDialogModule,
     MatIconModule,
+    MatListModule,
     FlexLayoutModule
   ],
   providers: [MatDatepickerModule, ApiService],
