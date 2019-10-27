@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DialogNotificationComponent {
 
-  constructor(private dialogRef: MatDialogRef<DialogNotificationComponent>, @Inject(MAT_DIALOG_DATA) private message: String) { }
+  constructor(private dialogRef: MatDialogRef<DialogNotificationComponent>, @Inject(MAT_DIALOG_DATA) private data: String) { }
 
   onClose():void {
     this.dialogRef.close()

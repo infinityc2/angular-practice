@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,7 +51,8 @@ import { LayoutCustomerComponent } from './layouts/layout-customer/layout-custom
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    FlexLayoutModule
   ],
   providers: [MatDatepickerModule, ApiService],
   bootstrap: [AppComponent],
