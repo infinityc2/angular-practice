@@ -1,3 +1,4 @@
+import { DialogForm } from './../../classes/dialog-form';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -8,9 +9,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DialogNotificationComponent {
 
-  constructor(private dialogRef: MatDialogRef<DialogNotificationComponent>, @Inject(MAT_DIALOG_DATA) private data: String) { }
+  constructor(private dialogRef: MatDialogRef<DialogNotificationComponent>, @Inject(MAT_DIALOG_DATA) private data: DialogForm) { }
 
-  onClose():void {
-    this.dialogRef.close()
+  onClose(): void {
+    this.dialogRef.close();
   }
 }

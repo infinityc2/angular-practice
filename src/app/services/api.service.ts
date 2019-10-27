@@ -17,9 +17,8 @@ export class ApiService {
 
   login(user: FormGroup): Observable<any> {
     return this.http.post(`${environment.api}/customer/login`, {
-      email: user.get("email").value,
-      password: user.get("password").value
+      email: user.get('email').value,
+      password: user.get('password').value
     });
   }
-  
 }

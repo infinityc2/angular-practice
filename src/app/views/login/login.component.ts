@@ -14,7 +14,14 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private api: ApiService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private api: ApiService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog) {
+
+  }
 
   ngOnInit() {
     this.initLoginForm();
@@ -32,13 +39,22 @@ export class LoginComponent implements OnInit {
       this.api.login(this.loginForm).subscribe(response => {
         
       }, error => {
-        console.log(error)
-      })
+        this.dialog.open(DialogNotificationComponent, {
+          width: `300px`,
+          data: {
+            header: `Wrong email or password`,
+            message: `email or not correct`
+          }
+        })
+      });
     } else {
       this.dialog.open(DialogNotificationComponent, {
         width: `300px`,
-        data: `Invalid Form`
-      })
+        data: {
+          header: `Invalid Form`,
+          message: `This form is invalid`
+        }
+      });
     }
   }
 
