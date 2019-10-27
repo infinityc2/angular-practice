@@ -15,11 +15,14 @@ export class ApiService {
     return this.http.get(`${environment.api}/computer/type`);
   }
 
+  getBrands(): Observable<any> {
+    return this.http.get(`${environment.api}/computer/brand`)
+  }
+
   login(user: FormGroup): Observable<any> {
     return this.http.post(`${environment.api}/customer/login`, {
-      email: user.get("email").value,
-      password: user.get("password").value
+      email: user.get('email').value,
+      password: user.get('password').value
     });
   }
-  
 }
