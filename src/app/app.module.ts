@@ -21,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { LoginComponent } from './views/login/login.component';
 import { RequestComponent } from './views/request/request.component';
@@ -61,7 +62,8 @@ import { DialogToolsComponent } from './components/dialog-tools/dialog-tools.com
     FlexLayoutModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCheckboxModule
   ],
   providers: [MatDatepickerModule, ApiService],
   bootstrap: [AppComponent],

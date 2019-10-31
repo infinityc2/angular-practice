@@ -3,7 +3,16 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Tool">
 </mat-form-field>
 <div mat-dialog-content>
-    <mat-table [dataSource]="tools" class="mat-elevation-z8" matSort>
+    <mat-table [dataSource]="tools" class="mat-elevation-z8" matSort matSortDisableClear>
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" (change)="$event ? toggle(): null"></mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element): null" [checked]="selection.isSelected(element)"></mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header>No.</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
@@ -24,8 +33,8 @@
             <mat-cell *matCellDef="let element">{{ element.type.type }}</mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="['id', 'name', 'price', 'type']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['id', 'name', 'price', 'type'];"></mat-row>
+        <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
     </mat-table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
@@ -33,6 +42,6 @@
 <div mat-dialog-actions>
     <div class="button" dir="ltr">
         <button (click)="onClose()" mat-button>Close</button>
-        <button mat-raised-button color="primary">Add</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="selection.selected">Add</button>
     </div>
 </div>
