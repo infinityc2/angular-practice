@@ -16,7 +16,11 @@ export class ApiService {
   }
 
   getBrands(): Observable<any> {
-    return this.http.get(`${environment.api}/computer/brand`)
+    return this.http.get(`${environment.api}/computer/brand`);
+  }
+
+  getTools(): Observable<any> {
+    return this.http.get(`${environment.api}/tool/name`);
   }
 
   login(user: FormGroup): Observable<any> {
@@ -24,5 +28,19 @@ export class ApiService {
       email: user.get('email').value,
       password: user.get('password').value
     });
+  }
+
+  register(register: FormGroup): Observable<any> {
+    return this.http.post(`${environment.api}/customer/register`, {
+      customerType: register.get('customerType').value,
+      gender: register.get('gender').value,
+      province: register.get('province').value,
+      email: register.get('email').value,
+      firstname: register.get('firstname').value,
+      lastname: register.get('lastname').value,
+      password: register.get('password').value,
+      phone: register.get('phone').value,
+      address: register.get('address').value
+    })
   }
 }

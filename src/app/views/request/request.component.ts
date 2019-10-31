@@ -1,3 +1,6 @@
+import { AppDateAdapter, APP_DATE_FORMATS } from './../../shared/date-format';
+import { DialogToolsComponent } from './../../components/dialog-tools/dialog-tools.component';
+import { MatDialog, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { ApiService } from './../../services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -5,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
-  styleUrls: ['./request.component.sass']
+  styleUrls: ['./request.component.sass'],
+  providers: [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class RequestComponent implements OnInit {
 
@@ -16,20 +23,28 @@ export class RequestComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private api: ApiService
+    private api: ApiService,
+    private dialog: MatDialog
   ) {
 
   }
 
   ngOnInit(): void {
-    this.initRequestForm()
-    this.getBrands()
+    this.initRequestForm();
+    this.getBrands();
+    this.getComputerTypes();
   }
 
   getBrands(): void {
     this.api.getBrands().subscribe(response => {
       this.brands = response;
     });
+  }
+
+  getComputerTypes(): void {
+    this.api.getComputerTypes().subscribe(response => {
+      this.computerTypes = response;
+    })
   }
 
   initRequestForm(): void {
@@ -41,6 +56,12 @@ export class RequestComponent implements OnInit {
       customer: ['', Validators.required],
       sentDate: ['', Validators.required],
       computerType: ['', Validators.required]
+    })
+  }
+
+  showDialogTool() {
+    this.dialog.open(DialogToolsComponent, {
+      width: '750px',
     })
   }
 

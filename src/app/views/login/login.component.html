@@ -13,10 +13,13 @@
             <input matInput placeholder="password" formControlName="password" type="password">
           </mat-form-field>
         </p>
-        <div class="button" dir="rtl">
-          <button mat-raised-button (click)="login()" color="primary">login</button>
-        </div>
       </form>
     </mat-card-content>
+    <mat-card-actions>
+      <div class="button" dir="auto">
+        <a mat-button routerLink="/register" color="secondary">Register</a>
+        <button mat-raised-button (click)="login()" color="primary">login</button>
+      </div>
+    </mat-card-actions>
   </mat-card>
 </div>

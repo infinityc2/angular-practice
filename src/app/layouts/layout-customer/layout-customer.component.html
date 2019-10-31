@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <span>
     <button mat-button (click)="sidenav.toggle()">
       <mat-icon>reorder</mat-icon>
@@ -7,11 +7,15 @@
   <span>Computer Repair System</span>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side">
+  <mat-sidenav #sidenav mode="side" class="sidebar">
     <mat-list>
-      <mat-list-item>
-          <mat-icon mat-list-icon>folder</mat-icon>
-          <h4>Request</h4>
+      <mat-list-item routerLink="/request">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4>Request</h4>
+      </mat-list-item>
+      <mat-list-item routerLink="/login">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4>Logout</h4>
       </mat-list-item>
     </mat-list>
   </mat-sidenav>
