@@ -34,7 +34,7 @@ export class DialogToolsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: Tool[]
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getTools();
   }
 
@@ -60,7 +60,7 @@ export class DialogToolsComponent implements OnInit {
     })
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(filterValue: string): void {
     this.tools.filter = filterValue.trim().toLowerCase();
 
     if (this.tools.paginator) {

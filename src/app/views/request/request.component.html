@@ -2,55 +2,49 @@
   <mat-card fxLayout="column" class="mat-elevation-z8">
     <mat-card-title>Repair Request</mat-card-title>
     <mat-card-content>
-      <form [formGroup]="requestForm">
-        <p>
-          <mat-form-field>
-            <input matInput formControlName="symptom" placeholder="Symptom" required>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field>
-            <mat-label>Brand</mat-label>
-            <mat-select required formControlName="brand">
-              <mat-option *ngFor="let brand of brands" [value]="brand.id">
-                {{ brand.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field>
-            <mat-label>Computer Type</mat-label>
-            <mat-select required formControlName="computerType">
-              <mat-option *ngFor="let computerType of computerTypes" [value]="computerType.id">
-                {{ computerType.type }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-        <p>
-          <button mat-raised-button color="primary" (click)="showDialogTool()">Select Tool</button>
-          <mat-list>
-            <mat-list-item *ngFor="let tool of tools">{{ tool.name }}</mat-list-item>
-          </mat-list>
-        </p>
-        <p>
-          <mat-form-field>
-            <input matInput [matDatepicker]="sentDate" placeholder="Sent Date" formControlName="sentDate">
-            <mat-datepicker-toggle matPrefix [for]="sentDate"></mat-datepicker-toggle>
-            <mat-datepicker #sentDate></mat-datepicker>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field>
-            <input matInput placeholder="Email" formControlName="email">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field>
-            <input matInput placeholder="Phone" formControlName="phone">
-          </mat-form-field>
-        </p>
+      <form [formGroup]="requestForm" class="form">
+
+        <mat-form-field>
+          <input matInput formControlName="symptom" placeholder="Symptom" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Brand</mat-label>
+          <mat-select required formControlName="brand">
+            <mat-option *ngFor="let brand of brands" [value]="brand.id">
+              {{ brand.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Computer Type</mat-label>
+          <mat-select required formControlName="computerType">
+            <mat-option *ngFor="let computerType of computerTypes" [value]="computerType.id">
+              {{ computerType.type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="showDialogTool()">Select Tool</button>
+        <mat-list>
+          <mat-list-item *ngFor="let tool of tools">{{ tool.name }}</mat-list-item>
+        </mat-list>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="sentDate" placeholder="Sent Date" formControlName="sentDate">
+          <mat-datepicker-toggle matPrefix [for]="sentDate"></mat-datepicker-toggle>
+          <mat-datepicker #sentDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Phone" formControlName="phone">
+        </mat-form-field>
+
       </form>
     </mat-card-content>
     <mat-card-actions>

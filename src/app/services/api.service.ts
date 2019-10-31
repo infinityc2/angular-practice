@@ -23,6 +23,18 @@ export class ApiService {
     return this.http.get(`${environment.api}/tool/name`);
   }
 
+  getGenders(): Observable<any> {
+    return this.http.get(`${environment.api}/gender`);
+  }
+
+  getProvinces(): Observable<any> {
+    return this.http.get(`${environment.api}/province`);
+  }
+
+  getCustomerType(): Observable<any> {
+    return this.http.get(`${environment.api}/customertype`);
+  }
+
   login(user: FormGroup): Observable<any> {
     return this.http.post(`${environment.api}/customer/login`, {
       email: user.get('email').value,

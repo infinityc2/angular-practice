@@ -9,12 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
+  customerTypes: Array<any>;
+  genders: Array<any>;
+  provinces: Array<any>;
+
   registerForm: FormGroup;
 
   constructor(private api: ApiService, private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
-    this.initRegisterForm()
+  ngOnInit(): void {
+    this.initRegisterForm();
+    this.getCustomerTypes();
+    this.getGenders();
+    this.getProvinces();
   }
 
   initRegisterForm(): void {
@@ -26,18 +33,38 @@ export class RegisterComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       password: ['', Validators.required, Validators.minLength(8)],
-      phone: ['', Validators.required, Validators.pattern('^[0-9]*$'), Validators.length === 10],
+      phone: ['', Validators.required, Validators.length === 10],
       address: ['', Validators.required]
     })
   }
 
-  register() {
+  getCustomerTypes(): void {
+    this.api.getCustomerType().subscribe(response => {
+      this.customerTypes = response;
+    })
+  }
+
+  getGenders():void {
+    this.api.getGenders().subscribe(response => {
+      this.genders = response;
+    })
+  }
+
+  getProvinces(): void {
+    this.api.getProvinces().subscribe(response => {
+      this.provinces = response;
+    })
+  }
+
+  register(): void {
     if (this.registerForm.valid) {
       this.api.register(this.registerForm).subscribe(response => {
         
       }, error => {
 
       })
+    } else {
+
     }
   }
 }

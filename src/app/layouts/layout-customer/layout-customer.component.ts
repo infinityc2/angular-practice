@@ -9,7 +9,7 @@ export class LayoutCustomerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

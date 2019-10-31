@@ -1,22 +1,65 @@
-<mat-card>
-    <mat-card-title></mat-card-title>
-    <mat-card-content>
-        <form [formGroup]="registerForm">
-            <p>
+<div fxLayoutAlign="center" fxFlexAlign="auto">
+    <mat-card fxLayout="column" class="mat-elevation-z8">
+        <mat-card-title>Register</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="registerForm" class="form">
+
                 <mat-form-field>
-                    <input matInput placeholder="firstname" formControlName="firstname">
+                    <input matInput placeholder="firstname" formControlName="firstname" required>
                 </mat-form-field>
-            </p>
-            <p>
+
                 <mat-form-field>
-                    <input matInput placeholder="lastname" formControlName="lastname">
+                    <input matInput placeholder="lastname" formControlName="lastname" required>
                 </mat-form-field>
-            </p>
-            <p>
+
+                <mat-label>Gender</mat-label>
+                <mat-radio-group formControlName="gender" required>
+                    <mat-radio-button *ngFor="let gender of genders" [value]="gender.id">
+                        {{ gender.gender }}
+                    </mat-radio-button>
+                </mat-radio-group>
+
                 <mat-form-field>
-                    <input matInput placeholder="email" formControlName="email" type="email">
+                    <input matInput placeholder="email" formControlName="email" type="email" required>
                 </mat-form-field>
-            </p>
-        </form>
-    </mat-card-content>
-</mat-card>
+
+                <mat-form-field>
+                    <input type="password" matInput placeholder="password" formControlName="password" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Customer Type</mat-label>
+                    <mat-select required formControlName="customerType">
+                        <mat-option *ngFor="let customerType of customerTypes" [value]="customerType.id">
+                            {{ customerType.type }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="phone" formControlName="phone" type="tel" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <textarea matInput placeholder="address" formControlName="address" required matTextareaAutosize></textarea>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Province</mat-label>
+                    <mat-select required formControlName="province">
+                        <mat-option *ngFor="let province of provinces" [value]="province.id">
+                            {{ province.province }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="button" dir="ltr">
+                <a mat-button routerLink="/login">Cancel</a>
+                <button mat-raised-button color="primary">Register</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

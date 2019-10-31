@@ -20,7 +20,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'customer',
+    path: 'customer/:id',
     component: LayoutCustomerComponent,
     children: [
       {
