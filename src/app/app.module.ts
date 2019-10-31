@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { LoginComponent } from './views/login/login.component';
 import { RequestComponent } from './views/request/request.component';
@@ -63,7 +64,8 @@ import { DialogToolsComponent } from './components/dialog-tools/dialog-tools.com
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [MatDatepickerModule, ApiService],
   bootstrap: [AppComponent],
