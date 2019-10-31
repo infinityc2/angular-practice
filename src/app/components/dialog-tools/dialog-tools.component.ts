@@ -1,6 +1,7 @@
 import { ApiService } from './../../services/api.service';
-import { MatDialogRef, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MatTableDataSource, MatPaginator, MatSort, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
 
 export interface Tool {
   id: number;
@@ -19,14 +20,18 @@ export interface Tool {
 })
 export class DialogToolsComponent implements OnInit {
 
+  displayColumns: string[] = ['select', 'id', 'name', 'price', 'type'];
+
   tools: MatTableDataSource<Tool>;
+  selection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private dialogRef: MatDialogRef<DialogToolsComponent>,
-    private api: ApiService
+    private api: ApiService,
+    @Inject(MAT_DIALOG_DATA) private data: Tool[]
   ) { }
 
   ngOnInit() {
@@ -62,4 +67,15 @@ export class DialogToolsComponent implements OnInit {
       this.tools.paginator.firstPage();
     }
   }
+
+  isAllSelected(): boolean {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.tools.data.length;
+    return numSelected === numRows;
+  }
+
+  toggle(): void {
+    this.isAllSelected() ? this.selection.clear() : this.tools.data.forEach(response => this.selection.select(response));
+  }
+
 }

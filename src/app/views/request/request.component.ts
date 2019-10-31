@@ -18,6 +18,7 @@ export class RequestComponent implements OnInit {
 
   brands: Array<any>;
   computerTypes: Array<any>;
+  tools: Array<any>;
 
   requestForm: FormGroup;
 
@@ -60,8 +61,11 @@ export class RequestComponent implements OnInit {
   }
 
   showDialogTool() {
-    this.dialog.open(DialogToolsComponent, {
+    const dialog = this.dialog.open(DialogToolsComponent, {
       width: '750px',
+    })
+    dialog.afterClosed().subscribe(response => {
+      this.tools = response;
     })
   }
 
