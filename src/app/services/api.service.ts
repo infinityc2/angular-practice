@@ -36,23 +36,14 @@ export class ApiService {
   }
 
   login(user: FormGroup): Observable<any> {
-    return this.http.post(`${environment.api}/customer/login`, {
-      email: user.get('email').value,
-      password: user.get('password').value
-    });
+    return this.http.post(`${environment.api}/customer/login`, user.value);
   }
 
   register(register: FormGroup): Observable<any> {
-    return this.http.post(`${environment.api}/customer/register`, {
-      customerType: register.get('customerType').value,
-      gender: register.get('gender').value,
-      province: register.get('province').value,
-      email: register.get('email').value,
-      firstname: register.get('firstname').value,
-      lastname: register.get('lastname').value,
-      password: register.get('password').value,
-      phone: register.get('phone').value,
-      address: register.get('address').value
-    })
+    return this.http.post(`${environment.api}/customer/register`, register.value)
+  }
+
+  addRequest(request: FormGroup, tool: Array<any>): Observable<any> {
+    return this.http.post(`${environment.api}/request/repair/${tool}`, request.value);
   }
 }

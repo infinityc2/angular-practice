@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.api.login(this.loginForm).subscribe(response => {
         if (response.id) {
-          this.router.navigate(['/customer', {id: response.id}])
+          this.router.navigate([`/customer/${response.id}`])
         } else {
           this.dialog.open(DialogNotificationComponent, {
             width: `300px`,
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
               header: `Wrong email or password`,
               message: response.message
             }
-          })
+          });
         }
       });
     } else {
