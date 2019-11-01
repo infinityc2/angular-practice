@@ -24,6 +24,11 @@ const routes: Routes = [
     component: LayoutCustomerComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'request',
+        pathMatch: 'full'
+      },
+      {
         path: 'request',
         component: RequestComponent
       }

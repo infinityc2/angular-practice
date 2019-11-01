@@ -1,3 +1,5 @@
+import { DialogNotificationComponent } from 'src/app/components/dialog-notification/dialog-notification.component';
+import { MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +17,13 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private api: ApiService, private formBuilder: FormBuilder) { }
+  constructor(
+    private api: ApiService,
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.initRegisterForm();
@@ -29,13 +37,13 @@ export class RegisterComponent implements OnInit {
       customerType: ['', Validators.required],
       gender: ['', Validators.required],
       province: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(8)],
-      phone: ['', Validators.required, Validators.length === 10],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      phone: ['', [Validators.required, Validators.maxLength(10)]],
       address: ['', Validators.required]
-    })
+    });
   }
 
   getCustomerTypes(): void {
@@ -61,10 +69,22 @@ export class RegisterComponent implements OnInit {
       this.api.register(this.registerForm).subscribe(response => {
         
       }, error => {
-
-      })
+        this.dialog.open(DialogNotificationComponent, {
+          width: `300px`,
+          data: {
+            header: `$Error `,
+            message: `${error.response}: Cannot Register`
+          }
+        })
+      });
     } else {
-
+      this.dialog.open(DialogNotificationComponent, {
+        width: `300px`,
+        data: {
+          header: `Invalid Form`,
+          message: `This form is invalid`
+        }
+      })
     }
   }
 }

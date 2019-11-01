@@ -1,3 +1,5 @@
+import { DialogNotificationComponent } from './../../components/dialog-notification/dialog-notification.component';
+import { ActivatedRoute } from '@angular/router';
 import { AppDateAdapter, APP_DATE_FORMATS } from './../../shared/date-format';
 import { DialogToolsComponent } from './../../components/dialog-tools/dialog-tools.component';
 import { MatDialog, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
@@ -19,18 +21,21 @@ export class RequestComponent implements OnInit {
   brands: Array<any>;
   computerTypes: Array<any>;
   tools: Array<any>;
+  customer: Number;
 
   requestForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private api: ApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
   ) {
 
   }
 
   ngOnInit(): void {
+    this.customer = Number(this.route.snapshot.paramMap.get('id'));
     this.initRequestForm();
     this.getBrands();
     this.getComputerTypes();
@@ -50,23 +55,59 @@ export class RequestComponent implements OnInit {
 
   initRequestForm(): void {
     this.requestForm = this.formBuilder.group({
-      brand: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      phone: ['', Validators.required, Validators.maxLength(10)],
-      symptom: ['', Validators.required, Validators.minLength(10)],
-      customer: ['', Validators.required],
-      sentDate: ['', Validators.required],
-      computerType: ['', Validators.required]
+      brand: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      phone: [null, [Validators.required, Validators.maxLength(10)]],
+      symptom: [null, [Validators.required, Validators.minLength(10)]],
+      sentDate: [null, Validators.required],
+      computerType: [null, Validators.required],
+      customer: [this.customer]
     })
   }
 
-  showDialogTool() {
+  showDialogTool(): void {
     const dialog = this.dialog.open(DialogToolsComponent, {
       width: '750px',
-    })
+    });
     dialog.afterClosed().subscribe(response => {
       this.tools = response;
-    })
+    });
+  }
+
+  addRequest(): void {
+    let toolTemp: Array<any> = [];
+    if (this.tools) {
+      this.tools.forEach(tool => {
+        toolTemp.push(tool.id);
+      });
+    }
+    if (this.requestForm.valid) {
+      this.api.addRequest(this.requestForm, toolTemp).subscribe(response => {
+        this.dialog.open(DialogNotificationComponent, {
+          width: `300px`,
+          data: {
+            header: `Notification`,
+            message: `${response}: Add Your Request Completed`
+          }
+        });
+      }, error => {
+        this.dialog.open(DialogNotificationComponent, {
+          width: `300px`,
+          data: {
+            header: `Error`,
+            message: `${error.response}: Cannot Add Your Request`
+          }
+        });
+      });
+    } else {
+      this.dialog.open(DialogNotificationComponent, {
+        width: `300px`,
+        data: {
+          header: `Invalid Form`,
+          message: `This form is invalid`
+        }
+      });
+    }
   }
 
 }

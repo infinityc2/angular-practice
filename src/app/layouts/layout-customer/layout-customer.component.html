@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="mat-elevation-z8">
   <span>
-    <button mat-button (click)="sidenav.toggle()">
+    <button mat-icon mat-button (click)="sidenav.toggle()">
       <mat-icon>reorder</mat-icon>
     </button>
   </span>
@@ -9,12 +9,12 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="over" class="sidebar" hasBackdrop>
     <mat-list>
-      <mat-list-item routerLink="/request">
-        <mat-icon mat-list-icon>folder</mat-icon>
+      <mat-list-item routerLink="request">
+        <mat-icon mat-list-icon>assignment</mat-icon>
         <h4>Request</h4>
       </mat-list-item>
       <mat-list-item routerLink="/login">
-        <mat-icon mat-list-icon>folder</mat-icon>
+        <mat-icon mat-list-icon>clear</mat-icon>
         <h4>Logout</h4>
       </mat-list-item>
     </mat-list>
